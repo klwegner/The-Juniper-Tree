@@ -34,8 +34,6 @@ window.onload = () => {
         this.width = width;
         this.height = height;
         this.vY = 10;
-
-
       }
 
       draw() {
@@ -65,9 +63,11 @@ window.onload = () => {
       }
 
       updatePositionFall() {
-        this.y += this.vY;
-        if(this.y == 550) {
-          clearInterval(intervalId);
+ 
+        if(this.y <= 475) {
+          this.y += this.vY;
+        } else {
+          this.y == 475;
         }
 
       }
@@ -89,13 +89,7 @@ window.onload = () => {
     let millX = 375;
     let millY = 50;
 
-    const myBackground = new ImageObject(
-      0,
-      0,
-      myCanvas.width,
-      myCanvas.height,
-      background
-    );
+    const myBackground = new ImageObject(0, 0, myCanvas.width, myCanvas.height,background);
     const myStepmom = new ImageObject(stepX, stepY, 50, 100, stepmom);
     const myMillstone = new ImageObject(millX, millY, 50, 50, millstone);
 
