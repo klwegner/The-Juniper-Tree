@@ -1,4 +1,4 @@
-//to do: 1. fix crashwith; 2. reset stepmom and stone if not crash; 3. scream sound effect;
+//to do: 1. fix crashwith; 2. reset stone if not crash; 3. scream sound effect;
 
 window.onload = () => {
   let totalFrameCount = 0;
@@ -39,9 +39,8 @@ window.onload = () => {
         this.width = width;
         this.height = height;
         this.vY = 15;
-        this.vX = 10;
+        this.vX = 5;
         this.image = imageElement;
-        
       }
 
       draw() {
@@ -63,9 +62,18 @@ window.onload = () => {
       }
 
       crashWith(target) {
-        return !(this.bottom() > (target.top() - 35) &&
-       ( this.right() < target.left() || this.left() > target.right())
-        );
+        if (
+          this.x < target.x + target.width &&
+          this.x + this.width > target.x &&
+          this.y < target.y + target.height &&
+          this.height + this.y > target.y
+        ) {
+          // collision detected!
+          console.log("Collision detected");
+          return true;
+        } else {
+          return false;
+        }
       }
 
       //
@@ -77,36 +85,29 @@ window.onload = () => {
         }
       }
 
-     
-
       updateStepmom() {
-
         //works still but no change in velocity
-        let RandomSpeed = (Math.random()* 1);
+        let RandomSpeed = Math.random() * 1;
         this.x += this.vX;
         if (this.x + 50 > 800 || this.x < 25) {
           this.vX *= -1;
-          
         }
-        if (totalFrameCount > startingFrame + randomFrame) {
-          randomFrame = Math.random() * 120 + 60;
-          startingFrame = totalFrameCount;}
-          if (stepmom.vX > 0) {
-  stepmom.vX = RandomSpeed;
-}
-else {stepmom.vX = RandomSpeed * -1;
-}
-
+        //         if (totalFrameCount > startingFrame + randomFrame) {
+        //           randomFrame = Math.random() * 120 + 60;
+        //           startingFrame = totalFrameCount;}
+        //           if (stepmom.vX > 0) {
+        //   stepmom.vX = RandomSpeed;
+        // }
+        // else {stepmom.vX = RandomSpeed * -1;
+        // }
       }
 
-
-    resetMillstone() {
-
-      //not resetting millstone 
-      myMillstone.draw();
-    }  
+      resetMillstone() {
+        //not resetting millstone
+        myMillstone.y=50;
+      }
     }
-    
+
     let stepX = 400;
     let stepY = 500;
     let millX = 375;
@@ -138,11 +139,8 @@ else {stepmom.vX = RandomSpeed * -1;
     }
 
     function updateGame() {
-      
       totalFrameCount++;
       minTimer();
-
-     
 
       if (totalFrameCount > startingFrame + randomFrame) {
         randomFrame = Math.random() * 120 + 60;
@@ -150,12 +148,12 @@ else {stepmom.vX = RandomSpeed * -1;
         let k = Math.round(Math.random());
         // let RandomSpeed = (Math.random()* 1);
 
-// if (stepmom.vX > 0) {
-//   stepmom.vX = RandomSpeed;
-// }
-// else {stepmom.vX = RandomSpeed * -1;
+        // if (stepmom.vX > 0) {
+        //   stepmom.vX = RandomSpeed;
+        // }
+        // else {stepmom.vX = RandomSpeed * -1;
 
-// }
+        // }
         if (k == 1) {
           myStepmom.vX *= -1;
         }
@@ -168,7 +166,28 @@ else {stepmom.vX = RandomSpeed * -1;
       myStepmom.draw();
       myMillstone.draw();
 
-      
+
+
+
+      if (myMillstone.crashWith(myStepmom)) {
+        let momScream = new sound("scream11.wav");
+        momScream.play();
+        window.confirm(
+          "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
+        );
+
+        clearInterval(intervalId);
+      } else if (myMillstone.y >= 475) {
+        // alert(
+        //   "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
+        // );
+
+        myMillstone.resetMillstone();
+      }
+
+
+
+
     }
 
     background.onload = () => {
@@ -182,24 +201,12 @@ else {stepmom.vX = RandomSpeed * -1;
           myMillstone.updatePositionFall();
           console.log("space pressed");
 
-          
-      if (myStepmom.crashWith(myMillstone)) {
-        let momScream = new sound("scream11.wav");
-        momScream.play();
-        alert(
-          "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
-        );
-        clearInterval(intervalId);
-      }
-      else if (myMillstone.y == 475)
-{
-myMillstone.resetMillstone();
-     }
+         
 
           break;
         //case to reload stone
       }
-    })
+    });
 
     document.addEventListener("keyup", (event) => {
       event.preventDefault();
