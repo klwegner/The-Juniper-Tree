@@ -336,6 +336,7 @@ h1:nth-child(2) {
 
 footer {
     text-align: center;
+    align-items: center;
 }
 
 
@@ -369,18 +370,19 @@ footer {
   width: 775px;
   height: 620px;
   font-size: 35px;
-  line-height: 17.5px;
+  line-height: 35px;
   text-align: center;
   align-content: center;
   background-color: white;
-  color: black
+  color: black;
   margin-top:100px;
   padding:50px 25px;
   position: absolute;
   z-index: 12;
   bottom: 125%;
   left: 10%;
-  border:10px solid rgb(182, 0, 0);
+  border:10px solid black;
+  margin:auto;
 }
 
 #boyPicture{
