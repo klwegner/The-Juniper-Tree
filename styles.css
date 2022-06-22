@@ -286,28 +286,6 @@ h1:nth-child(2) {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .countdown {
     background-color: rgb(0, 0, 0);
     color:white;
@@ -322,7 +300,7 @@ h1:nth-child(2) {
     top:0;
     right:0;
     margin-top: 20px;
-    z-index: 11;
+    z-index: 10;
 }
 
 .start-button {
@@ -358,4 +336,110 @@ h1:nth-child(2) {
 
 footer {
     text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  width: 775px;
+  height: 620px;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin:auto;
+  margin-top:100px;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 775px;
+  height: 620px;
+  font-size: 35px;
+  line-height: 17.5px;
+  text-align: center;
+  align-content: center;
+  background-color: white;
+  color: black
+  margin-top:100px;
+  padding:50px 25px;
+  position: absolute;
+  z-index: 12;
+  bottom: 125%;
+  left: 10%;
+  border:10px solid rgb(182, 0, 0);
+}
+
+#boyPicture{
+  opacity: 0.5;
+  height: 75%;
+  width: auto;
+  animation: fadeIn 10s;
+}
+
+/* Popup arrow */
+/* .popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+} */
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+
+
+@keyframes type{
+  from{width:0}
+}
+@keyframes type2{
+  0%{width: 0;}
+  50%{width: 0;}
+  100%{ width: 100; }
+}
+@keyframes blink{
+  0%,100%{border-color:transparent}
+  50%{border-color:black}
+}
+
+
+#typewritertext {
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 6px;
+  font-weight: bold;
+  line-height: 100%;
 }

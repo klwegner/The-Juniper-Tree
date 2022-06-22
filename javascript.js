@@ -5,7 +5,7 @@ window.onload = () => {
   let randomFrame = Math.random() * 120 + 60;
   let startingFrame = totalFrameCount;
   let intervalId = null;
-  let totalSeconds = 60;
+  let totalSeconds = 30;
   let place = document.querySelector(".countdown");
 
   console.log("window load");
@@ -38,8 +38,8 @@ window.onload = () => {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.vY = 15;
-        this.vX = 5;
+        this.vY = 10;
+        this.vX = 15;
         this.image = imageElement;
         this.falling = false;
       }
@@ -67,7 +67,7 @@ window.onload = () => {
           this.x < target.x + target.width &&
           this.x + this.width > target.x &&
           this.y < target.y + 35 + target.height &&
-          this.height + this.y > target.y
+          this.height + this.y > target.y + 35
         ) {
           // collision detected!
           console.log("Collision detected");
@@ -170,17 +170,16 @@ window.onload = () => {
       myMillstone.draw();
 
       if (myMillstone.crashWith(myStepmom)) {
-
+        clearInterval(intervalId);
         var screamSound = new Audio("./scream11.wav");
         screamSound.loop = false;
         screamSound.volume = 0.8;
         screamSound.play();
+        endPopup();
       //mom scream after window closes
-        window.confirm(
-          "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
-        );
-
-        clearInterval(intervalId);
+        // window.confirm(
+        //   "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
+        // );
       } 
     }
 
@@ -228,3 +227,63 @@ function sound(src) {
     this.sound.pause();
   };
 }
+
+
+
+function endPopup() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");  
+  typewriter();
+
+  //get boy pic to appear
+
+
+  setTimeout(function(){
+    document.getElementById("boyPicture").removeAttribute("hidden");
+},17000);
+}
+
+
+
+
+var aText = new Array(
+  "The father and little Marlinchen",
+        "heard the sound but saw only mist and fire.",
+          "When these had passed,", 
+        "there stood the little brother...",
+          "and all three rejoiced." 
+  );
+  var iSpeed = 100; // time delay of print out
+  var iIndex = 0; // start printing array at this posision
+  var iArrLength = aText[0].length; // the length of the text array
+  var iScrollAt = 20; // start scrolling up at this many lines
+   
+  var iTextPos = 0; // initialise text position
+  var sContents = ''; // initialise contents variable
+  var iRow; // initialise current row
+   
+  function typewriter()
+  {
+    console.log('typewriter activates')
+   sContents =  ' ';
+   iRow = Math.max(0, iIndex-iScrollAt);
+   var destination = document.getElementById("typewritertext");
+   
+   while ( iRow < iIndex ) {
+    sContents += aText[iRow++] + '<br />';
+   }
+   destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
+   if ( iTextPos++ == iArrLength ) {
+    iTextPos = 0;
+    iIndex++;
+    if ( iIndex != aText.length ) {
+     iArrLength = aText[iIndex].length;
+     setTimeout("typewriter()", 500);
+    }
+   } else {
+    setTimeout("typewriter()", iSpeed);
+   }
+  }
+  
+
+  
