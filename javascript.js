@@ -1,4 +1,4 @@
-//to do: 1. fix crashwith; 2. reset stepmom and stone if not crash; 3. scream sound effect; 4. Randomize stepmom movement
+//to do: 1. fix crashwith; 2. reset stepmom and stone if not crash; 3. scream sound effect;
 
 window.onload = () => {
   let totalFrameCount = 0;
@@ -63,11 +63,8 @@ window.onload = () => {
       }
 
       crashWith(target) {
-        //isn't working properly 
-        return !(
-          this.bottom() < target.top() + 35 ||
-          this.right() < target.left() ||
-          this.left() > target.right()
+        return !(this.bottom() > (target.top() - 35) &&
+       ( this.right() < target.left() || this.left() > target.right())
         );
       }
 
@@ -100,6 +97,11 @@ else {stepmom.vX = RandomSpeed * -1;
 }
 
       }
+
+
+    resetMillstone() {
+      myMillstone.draw();
+    }  
     }
     
     let stepX = 400;
@@ -176,7 +178,7 @@ else {stepmom.vX = RandomSpeed * -1;
           console.log("space pressed");
 
           
-      if (myMillstone.crashWith(myStepmom)) {
+      if (myStepmom.crashWith(myMillstone)) {
         let momScream = new sound("scream11.wav");
         momScream.play();
         clearInterval(intervalId);
@@ -184,6 +186,10 @@ else {stepmom.vX = RandomSpeed * -1;
           "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
         );
       }
+      else if (myMillstone.y == 475)
+{
+myMillstone.resetMillstone();
+     }
 
           break;
         //case to reload stone
