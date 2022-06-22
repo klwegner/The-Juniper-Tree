@@ -39,7 +39,7 @@ window.onload = () => {
         this.width = width;
         this.height = height;
         this.vY = 15;
-        this.vX = 5;
+        this.vX = 10;
         this.image = imageElement;
         
       }
@@ -68,11 +68,12 @@ window.onload = () => {
         );
       }
 
+      //
       updatePositionFall() {
         if (this.y <= 475) {
           this.y += this.vY;
-        } else {
-          this.y == 475;
+        } else if (this.y >= 476) {
+          this.y = 50;
         }
       }
 
@@ -100,6 +101,8 @@ else {stepmom.vX = RandomSpeed * -1;
 
 
     resetMillstone() {
+
+      //not resetting millstone 
       myMillstone.draw();
     }  
     }
@@ -139,22 +142,24 @@ else {stepmom.vX = RandomSpeed * -1;
       totalFrameCount++;
       minTimer();
 
-//       if (totalFrameCount > startingFrame + randomFrame) {
-//         randomFrame = Math.random() * 120 + 60;
-//         startingFrame = totalFrameCount;
-//         let k = Math.round(Math.random());
-//         // let RandomSpeed = (Math.random()* 1);
+     
 
-// // if (stepmom.vX > 0) {
-// //   stepmom.vX = RandomSpeed;
-// // }
-// // else {stepmom.vX = RandomSpeed * -1;
+      if (totalFrameCount > startingFrame + randomFrame) {
+        randomFrame = Math.random() * 120 + 60;
+        startingFrame = totalFrameCount;
+        let k = Math.round(Math.random());
+        // let RandomSpeed = (Math.random()* 1);
 
-// // }
-//         if (k == 1) {
-//           myStepmom.vX *= -1;
-//         }
-//       }
+// if (stepmom.vX > 0) {
+//   stepmom.vX = RandomSpeed;
+// }
+// else {stepmom.vX = RandomSpeed * -1;
+
+// }
+        if (k == 1) {
+          myStepmom.vX *= -1;
+        }
+      }
 
       myStepmom.updateStepmom();
 
@@ -181,10 +186,10 @@ else {stepmom.vX = RandomSpeed * -1;
       if (myStepmom.crashWith(myMillstone)) {
         let momScream = new sound("scream11.wav");
         momScream.play();
-        clearInterval(intervalId);
         alert(
           "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
         );
+        clearInterval(intervalId);
       }
       else if (myMillstone.y == 475)
 {
