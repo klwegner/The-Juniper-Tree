@@ -41,6 +41,7 @@ window.onload = () => {
         this.vY = 15;
         this.vX = 5;
         this.image = imageElement;
+        this.falling = false;
       }
 
       draw() {
@@ -65,7 +66,7 @@ window.onload = () => {
         if (
           this.x < target.x + target.width &&
           this.x + this.width > target.x &&
-          this.y < target.y + target.height &&
+          this.y < target.y + 35 + target.height &&
           this.height + this.y > target.y
         ) {
           // collision detected!
@@ -78,10 +79,12 @@ window.onload = () => {
 
       //
       updatePositionFall() {
-        if (this.y <= 475) {
+        if (this.falling) {
           this.y += this.vY;
-        } else if (this.y >= 476) {
-          this.y = 50;
+          if (this.y >= 526) {
+            this.y = 50;
+            this.falling = false;
+          }
         }
       }
 
@@ -104,7 +107,7 @@ window.onload = () => {
 
       resetMillstone() {
         //not resetting millstone
-        myMillstone.y=50;
+        myMillstone.y = 50;
       }
     }
 
@@ -158,7 +161,7 @@ window.onload = () => {
           myStepmom.vX *= -1;
         }
       }
-
+      myMillstone.updatePositionFall();
       myStepmom.updateStepmom();
 
       ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
@@ -166,28 +169,19 @@ window.onload = () => {
       myStepmom.draw();
       myMillstone.draw();
 
-
-
-
       if (myMillstone.crashWith(myStepmom)) {
-        let momScream = new sound("scream11.wav");
-        momScream.play();
+
+        var screamSound = new Audio("./scream11.wav");
+        screamSound.loop = false;
+        screamSound.volume = 0.8;
+        screamSound.play();
+      //mom scream after window closes
         window.confirm(
           "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
         );
 
         clearInterval(intervalId);
-      } else if (myMillstone.y >= 475) {
-        // alert(
-        //   "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
-        // );
-
-        myMillstone.resetMillstone();
-      }
-
-
-
-
+      } 
     }
 
     background.onload = () => {
@@ -198,28 +192,25 @@ window.onload = () => {
       event.preventDefault();
       switch (event.code) {
         case "Space":
-          myMillstone.updatePositionFall();
+          myMillstone.falling = true;
           console.log("space pressed");
 
-         
-
-          break;
-        //case to reload stone
-      }
-    });
-
-    document.addEventListener("keyup", (event) => {
-      event.preventDefault();
-      switch (event.code) {
-        case "Space":
-          ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-          myBackground.draw();
-          myStepmom.draw();
-          myMillstone.draw();
-          console.log("space released");
           break;
       }
     });
+
+    // document.addEventListener("keyup", (event) => {
+    //   event.preventDefault();
+    //   switch (event.code) {
+    //     case "Space":
+    //       ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    //       myBackground.draw();
+    //       myStepmom.draw();
+    //       myMillstone.draw();
+    //       console.log("space released");
+    //       break;
+    //   }
+    // });
   }
 };
 
