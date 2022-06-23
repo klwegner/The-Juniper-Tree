@@ -1,4 +1,3 @@
-//to do: 1. fix crashwith; 2. reset stone if not crash; 3. scream sound effect;
 
 window.onload = () => {
   let totalFrameCount = 0;
@@ -38,7 +37,7 @@ window.onload = () => {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.vY = 10;
+        this.vY = 5;
         this.vX = 15;
         this.image = imageElement;
         this.falling = false;
@@ -176,10 +175,6 @@ window.onload = () => {
         screamSound.volume = 0.8;
         screamSound.play();
         endPopup();
-      //mom scream after window closes
-        // window.confirm(
-        //   "The father and little Marlinchen heard the sound but saw only mist and fire. When these had passed, there stood the little brother... and all three rejoiced."
-        // );
       } 
     }
 
@@ -197,19 +192,6 @@ window.onload = () => {
           break;
       }
     });
-
-    // document.addEventListener("keyup", (event) => {
-    //   event.preventDefault();
-    //   switch (event.code) {
-    //     case "Space":
-    //       ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-    //       myBackground.draw();
-    //       myStepmom.draw();
-    //       myMillstone.draw();
-    //       console.log("space released");
-    //       break;
-    //   }
-    // });
   }
 };
 
@@ -287,3 +269,20 @@ var aText = new Array(
   
 
   
+
+
+  //slideshow
+
+  let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  slides[slideIndex-1].style.display = "block";  
+  setTimeout(showSlides, 5000); // Change image every 2 seconds
+}

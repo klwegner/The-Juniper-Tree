@@ -20,14 +20,14 @@ body {
     left: 101%;
     display: flex;
     flex-direction: column;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
 }
 
     
 .branches2 {
     top:0;
     margin:0;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 .gameArea {
@@ -53,6 +53,7 @@ body {
     border: 5px solid black;
     position: absolute;
     z-index: 10;
+    /* box-shadow: 5px 5px 2.5px rgba(182, 0, 0, 0.7); */
     
 
 
@@ -66,6 +67,10 @@ body {
 .stepmom > img {
     height: 100px;
     width: auto;
+}
+
+.title-pic {
+  padding:20px;
 }
 
 header {
@@ -375,14 +380,29 @@ footer {
   align-content: center;
   background-color: white;
   color: black;
-  margin-top:100px;
   padding:50px 25px;
-  position: absolute;
   z-index: 12;
-  bottom: 125%;
-  left: 10%;
   border:10px solid black;
-  margin:auto;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+
+
+
+
+
+
+  /* margin-top:100px;
+  position: absolute; 
+  
+   bottom: 125%; */
+  /* left: 10%; */
+  /* margin:auto; */
+  /* top: calc(50% - 387.5px);
+  left: calc(50% - 310px); */
 }
 
 #boyPicture{
@@ -444,4 +464,31 @@ footer {
   letter-spacing: 6px;
   font-weight: bold;
   line-height: 100%;
+}
+
+.slideshow-container {
+  width: 454px;
+  height: 291px;
+  position: relative;
+  margin: auto;
+  padding:20px;
+  margin-top:20px;
+}
+
+.numbertext {
+  color: #000000;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
 }
