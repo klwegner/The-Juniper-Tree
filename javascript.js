@@ -1,4 +1,3 @@
-
 window.onload = () => {
   let totalFrameCount = 0;
   let randomFrame = Math.random() * 120 + 60;
@@ -137,6 +136,7 @@ window.onload = () => {
 
       if (remainingTime <= 0) {
         clearInterval(intervalId);
+        losePopup();
       }
     }
 
@@ -175,7 +175,7 @@ window.onload = () => {
         screamSound.volume = 0.8;
         screamSound.play();
         endPopup();
-      } 
+      }
     }
 
     background.onload = () => {
@@ -210,79 +210,72 @@ function sound(src) {
   };
 }
 
-
-
 function endPopup() {
   var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");  
+  popup.classList.toggle("show");
   typewriter();
 
-  //get boy pic to appear
-
-
-  setTimeout(function(){
+  setTimeout(function () {
     document.getElementById("boyPicture").removeAttribute("hidden");
-},17000);
+  }, 17000);
 }
 
-
-
+function losePopup() {
+  var gameOver = document.getElementById("myPopup2");
+  gameOver.classList.toggle("show");
+}
 
 var aText = new Array(
   "The father and little Marlinchen",
-        "heard the sound but saw only mist and fire.",
-          "When these had passed,", 
-        "there stood the little brother...",
-          "and all three rejoiced." 
-  );
-  var iSpeed = 100; // time delay of print out
-  var iIndex = 0; // start printing array at this posision
-  var iArrLength = aText[0].length; // the length of the text array
-  var iScrollAt = 20; // start scrolling up at this many lines
-   
-  var iTextPos = 0; // initialise text position
-  var sContents = ''; // initialise contents variable
-  var iRow; // initialise current row
-   
-  function typewriter()
-  {
-    console.log('typewriter activates')
-   sContents =  ' ';
-   iRow = Math.max(0, iIndex-iScrollAt);
-   var destination = document.getElementById("typewritertext");
-   
-   while ( iRow < iIndex ) {
-    sContents += aText[iRow++] + '<br />';
-   }
-   destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
-   if ( iTextPos++ == iArrLength ) {
+  "heard the sound but saw only mist and fire.",
+  "When these had passed,",
+  "there stood the little brother...",
+  "and all three rejoiced."
+);
+var iSpeed = 100; // time delay of print out
+var iIndex = 0; // start printing array at this posision
+var iArrLength = aText[0].length; // the length of the text array
+var iScrollAt = 20; // start scrolling up at this many lines
+
+var iTextPos = 0; // initialise text position
+var sContents = ""; // initialise contents variable
+var iRow; // initialise current row
+
+function typewriter() {
+  console.log("typewriter activates");
+  sContents = " ";
+  iRow = Math.max(0, iIndex - iScrollAt);
+  var destination = document.getElementById("typewritertext");
+
+  while (iRow < iIndex) {
+    sContents += aText[iRow++] + "<br />";
+  }
+  destination.innerHTML =
+    sContents + aText[iIndex].substring(0, iTextPos) + "_";
+  if (iTextPos++ == iArrLength) {
     iTextPos = 0;
     iIndex++;
-    if ( iIndex != aText.length ) {
-     iArrLength = aText[iIndex].length;
-     setTimeout("typewriter()", 500);
+    if (iIndex != aText.length) {
+      iArrLength = aText[iIndex].length;
+      setTimeout("typewriter()", 500);
     }
-   } else {
+  } else {
     setTimeout("typewriter()", iSpeed);
-   }
   }
-  
+}
 
-  
+//slideshow
 
-
-  //slideshow
-
-  let slideIndex = 0;
+let slideIndex = 0;
 showSlides();
 
 function showSlides() {
   let i;
   let slides = document.getElementsByClassName("mySlides");
   for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+    slides[i].style.display = "none";
   }
   slideIndex++;
-  slides[slideIndex-1].style.display = "block";  
+  slides[slideIndex - 1].style.display = "block";
   setTimeout(showSlides, 10000); // Change image every 2 seconds
 }
